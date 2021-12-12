@@ -23,9 +23,7 @@
       <router-link to="/appointment" class="mx-2 p-2 border-b hover:border-green-600 font-bold text-green-600">
         Appointments
       </router-link>
-      <router-link to="/appointment/create" class="mx-2 p-2 border-b hover:border-green-600 font-bold text-green-600">
-        Create Appointment
-      </router-link>
+
       <form @submit="handleLogout">
         <button class="mx-2 p-2 border-b hover:border-green-600 font-bold text-green-600">
           <span>Logout</span>
@@ -33,8 +31,8 @@
       </form>
     </div>
   </div>
-  <main class="flex flex-col items-center justify-center w-full flex-1 px-20 text-center">
-    <div class="flex flex-wrap items-center justify-around max-w-4xl mt-6 sm:w-full">
+  <main class="flex flex-col items-center justify-center w-full flex-1  text-center">
+    <div class="flex flex-wrap items-center justify-around lg:max-w-4xl mt-6 w-full">
       <router-view/>
     </div>
   </main>

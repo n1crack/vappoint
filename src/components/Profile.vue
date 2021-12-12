@@ -1,5 +1,5 @@
 <template>
-  <div class="p-6 mt-6 text-left border w-96 rounded-xl" v-if="currentUser">
+  <div class="p-6 mt-6 text-left border w-full rounded-xl" v-if="currentUser">
     <header v-if="currentUser">
       <h3 class="font-bold text-indigo-600 text-center pb-6">
        {{ currentUser.name }}'s Profile
