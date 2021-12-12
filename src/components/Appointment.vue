@@ -6,34 +6,34 @@
       </router-link>
     </div>
     <div v-for="(appointment, index) in appointments" :key="index">
-      <div class="m-3 p-2 border rounded  text-left">
-        <div class="p-3 border relative">
+      <div class="m-3 p-4 border rounded shadow-lg text-left">
+        <div class="relative">
           <div class="absolute top-0 right-0">
             <button class="px-2 border border-red-300 bg-red-50 text-red-500">Delete</button>
           </div>
 
           <div class="font-bold text-blue-500 my-3">Appointment Detail</div>
 
-          <div class="flex"><span class="font-bold text-gray-700">Address:</span><span
+          <div class="flex  border-dashed border-b border-gray-300"><span class="font-bold text-gray-700 ">Address:</span><span
               class="ml-auto">{{ appointment.address }}</span></div>
-          <div class="flex"><span class="font-bold text-gray-700">Date:</span> <span
+          <div class="flex  border-dashed border-b border-gray-300"><span class="font-bold text-gray-700 ">Date:</span> <span
               class="ml-auto">{{ formatDate(appointment.date) }}</span></div>
-          <div class="flex"><span class="font-bold text-gray-700">Distance:</span> <span
+          <div class="flex  border-dashed border-b border-gray-300"><span class="font-bold text-gray-700 ">Distance:</span> <span
               class="ml-auto">{{ formatDistance(appointment.distance) }}</span></div>
-          <div class="flex"><span class="font-bold text-gray-700">Travel Time:</span> <span
+          <div class="flex  border-dashed border-b border-gray-300"><span class="font-bold text-gray-700 ">Travel Time:</span> <span
               class="ml-auto">{{ formatTravelTime(appointment.time) }}</span></div>
-          <div class="flex"><span class="font-bold text-gray-700">When to Leave Office:</span> <span
+          <div class="flex  border-dashed border-b border-gray-300"><span class="font-bold text-gray-700 ">When to Leave Office:</span> <span
               class="ml-auto">{{ formatDate(appointment.when_to_leave) }}</span></div>
-          <div class="flex"><span class="font-bold text-gray-700">Next Available Date:</span> <span
+          <div class="flex  border-dashed border-b border-gray-300"><span class="font-bold text-gray-700 ">Next Available Date:</span> <span
               class="ml-auto">{{ formatDate(appointment.next_available_date) }}</span></div>
 
           <div class="font-bold text-blue-500 my-3">Contact Detail</div>
 
-          <div class="flex"><span class="font-bold text-gray-700">Contact Name:</span> <span
+          <div class="flex  border-dashed border-b border-gray-300"><span class="font-bold text-gray-700">Contact Name:</span> <span
               class="ml-auto">{{ appointment.contact_name }} {{ appointment.contact_surname }}</span></div>
-          <div class="flex"><span class="font-bold text-gray-700">Email:</span> <span
+          <div class="flex  border-dashed border-b border-gray-300"><span class="font-bold text-gray-700">Email:</span> <span
               class="ml-auto">{{ appointment.contact_email }}</span></div>
-          <div class="flex"><span class="font-bold text-gray-700">Phone:</span> <span
+          <div class="flex  border-dashed border-b border-gray-300"><span class="font-bold text-gray-700">Phone:</span> <span
               class="ml-auto">{{ appointment.contact_phone }}</span></div>
 
         </div>
