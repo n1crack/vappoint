@@ -9,7 +9,7 @@
       <div class="m-3 p-4 border rounded shadow-lg text-left">
         <div class="relative">
           <div class="absolute top-0 right-0">
-            <button class="px-2 border border-red-300 bg-red-50 text-red-500">Delete</button>
+            <button @click="deleteAppointment(appointment.id)" class="px-2 border border-red-300 bg-red-50 text-red-500">Delete</button>
           </div>
 
           <div class="font-bold text-blue-500 my-3">Appointment Detail</div>
@@ -39,19 +39,30 @@
         </div>
       </div>
     </div>
+    <div v-if="isLoaded && appointments.length === 0" class="m-5">
+      <div class="p-5 border border-red-200 bg-red-50 text-red-400">
+        No appointments found.
+      </div>
+    </div>
   </div>
 </template>
 
 <script setup>
 
-import {useStore} from 'vuex'
 import {onMounted, ref} from "vue";
 import moment from "moment";
+import axios from "axios";
+import authHeader from "../services/auth-header";
+import {useRouter} from "vue-router";
 
-const store = useStore();
 
 const appointments = ref([]);
 const message = ref('');
+const isLoaded = ref(false);
+
+const API_URL = 'http://estateagent.test/api/appointment/';
+
+const router = useRouter();
 
 const formatTravelTime = (time) => {
   return moment.duration(time, "milliseconds").humanize(false);
@@ -65,10 +76,18 @@ const formatDate = (date) => {
   return moment(date).format('D MMM, Y, HH:mm');
 }
 
+const deleteAppointment = (id) => {
+    axios.delete(API_URL + id,  {headers: authHeader()}).then(
+      () => router.go(),
+      () => {}
+  );
+}
+
 onMounted(() => {
-  store.dispatch("appointment/all").then(
+   axios.get(API_URL, {headers: authHeader()}).then(
       (response) => {
         appointments.value = response.data.data;
+        isLoaded.value = true;
       },
       (error) => {
         message.value =
