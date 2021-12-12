@@ -9,7 +9,7 @@
         />
       </div>
 
-      <form @submit="handleLogin">
+      <form @submit="handleRegister">
         <div class="p-6 mt-6 text-left border w-96 rounded-xl ">
           <div class="my-2 text-xl">
             <label for="name" class="text-gray-700">Name</label>
@@ -29,7 +29,7 @@
 
           <div class="my-2 text-xl text-center">
             <button class="border p-2 text-gray-600 rounded hover:bg-gray-100 hover:border-gray-300">
-              <span>Login</span>
+              <span>Register</span>
             </button>
           </div>
 
@@ -68,7 +68,7 @@ const state = reactive(
 let errors = ref();
 
 
-const handleLogin = (event) => {
+const handleRegister = (event) => {
   event.preventDefault();
 
   store.dispatch("auth/register", state.user).then(
