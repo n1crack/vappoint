@@ -1,11 +1,10 @@
 import axios from 'axios';
 import authHeader from './auth-header';
-
-const API_URL = 'http://estateagent.test/api/auth/';
+import {API_URL} from "../../config";
 
 class UserService {
     getProfile() {
-        return axios.post(API_URL + 'me', {},{headers: authHeader()});
+        return axios.post(API_URL + 'api/auth/me', {},{headers: authHeader()});
     }
 }
 

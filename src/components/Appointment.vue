@@ -54,13 +54,11 @@ import moment from "moment";
 import axios from "axios";
 import authHeader from "../services/auth-header";
 import {useRouter} from "vue-router";
-
+import {API_URL} from "../../config";
 
 const appointments = ref([]);
 const message = ref('');
 const isLoaded = ref(false);
-
-const API_URL = 'http://estateagent.test/api/appointment/';
 
 const router = useRouter();
 
@@ -77,14 +75,14 @@ const formatDate = (date) => {
 }
 
 const deleteAppointment = (id) => {
-    axios.delete(API_URL + id,  {headers: authHeader()}).then(
+    axios.delete(API_URL + 'api/appointment/' + id,  {headers: authHeader()}).then(
       () => router.go(),
       () => {}
   );
 }
 
 onMounted(() => {
-   axios.get(API_URL, {headers: authHeader()}).then(
+   axios.get(API_URL + 'api/appointment/', {headers: authHeader()}).then(
       (response) => {
         appointments.value = response.data.data;
         isLoaded.value = true;

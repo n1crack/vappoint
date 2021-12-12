@@ -66,12 +66,10 @@ import {ref, reactive, onMounted} from 'vue'
 import {useRouter} from 'vue-router'
 import axios from "axios";
 import moment from "moment";
-
 import "leaflet/dist/leaflet"
 import "leaflet/dist/leaflet.css"
 import authHeader from "../services/auth-header";
-
-const API_URL = 'http://estateagent.test/api/appointment/';
+import {API_URL, MAPBOX_API_KEY} from "../../config";
 
 const router = useRouter();
 const state = reactive(
@@ -92,14 +90,12 @@ const nearestPostCode = ref();
 
 onMounted(() => {
   const map = window.L.map('map').setView([51.729117, 0.477935], 18);
-
-  const POSTCODE_API_URL = "http://estateagent.test/api/postcodes/nearest"
   const popup = window.L.popup();
 
   const onMapClick = (e) => {
 
     // find nearest post code..
-    axios.get(POSTCODE_API_URL, {
+    axios.get(API_URL+ '/api/postcodes/nearest', {
           params: {
             lon: e.latlng.lng,
             lat: e.latlng.lat
@@ -134,7 +130,7 @@ onMounted(() => {
     id: 'mapbox/streets-v11',
     tileSize: 512,
     zoomOffset: -1,
-    accessToken: 'pk.eyJ1IjoibjFjcmFjayIsImEiOiJja3gzZDZ1bHgwMmNjMnJwa3c2d2dtaXc5In0.GKbGrt3-G4ZGdXkSohN_ZQ'
+    accessToken: MAPBOX_API_KEY
   }).addTo(map);
 })
 
@@ -146,7 +142,7 @@ const handleCreate = (event) => {
 
   console.log(appointment)
 
-  axios.post(API_URL, appointment, {headers: authHeader()}).then(
+  axios.post(API_URL + 'api/appointment/', appointment, {headers: authHeader()}).then(
       () => {
         router.push("/appointment");
       },

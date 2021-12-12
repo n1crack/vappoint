@@ -1,0 +1,2 @@
+export const API_URL = 'http://estateagent.ozdemir.be/';
+export const MAPBOX_API_KEY = 'secret';

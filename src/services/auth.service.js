@@ -1,11 +1,10 @@
 import axios from 'axios';
-
-const API_URL = 'http://estateagent.test/api/auth/';
+import {API_URL} from "../../config";
 
 class AuthService {
     login(user) {
         return axios
-            .post(API_URL + 'login', {
+            .post(API_URL + 'api/auth/login', {
                 email: user.email,
                 password: user.password
             })
@@ -23,7 +22,7 @@ class AuthService {
     }
 
     register(user) {
-        return axios.post(API_URL + 'register', {
+        return axios.post(API_URL + 'api/auth/register', {
             name: user.name,
             email: user.email,
             password: user.password
