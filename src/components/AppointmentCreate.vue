@@ -83,7 +83,6 @@ const state = reactive(
         date: moment().format("YYYY-MM-DDTkk:mm"),
       }
     });
-console.log(moment().toISOString())
 let errors = ref();
 const nearestPostCode = ref();
 
@@ -95,7 +94,7 @@ onMounted(() => {
   const onMapClick = (e) => {
 
     // find nearest post code..
-    axios.get(API_URL+ '/api/postcodes/nearest', {
+    axios.get(API_URL+ 'api/postcodes/nearest', {
           params: {
             lon: e.latlng.lng,
             lat: e.latlng.lat
@@ -107,8 +106,7 @@ onMounted(() => {
           nearestPostCode.value = response.data;
           state.appointment.address = response.data.postcode ?? '';
         },
-        (error) => {
-          console.log(error);
+        () => {
         }
     );
 
@@ -139,8 +137,6 @@ const handleCreate = (event) => {
   event.preventDefault();
 
   const appointment = {...state.appointment, date: moment(state.appointment.date).format('YYYY-MM-DD HH:mm:ss')};
-
-  console.log(appointment)
 
   axios.post(API_URL + 'api/appointment/', appointment, {headers: authHeader()}).then(
       () => {
