@@ -10,7 +10,7 @@
       </div>
 
       <form @submit="handleLogin">
-        <div class="p-6 mt-6 text-left border w-96 rounded-xl ">
+        <div class="text-left border w-96 rounded-xl ">
 
           <div class="my-2 text-xl">
             <label for="email" class="text-gray-700">Email</label>

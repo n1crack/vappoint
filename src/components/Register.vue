@@ -10,7 +10,7 @@
       </div>
 
       <form @submit="handleRegister">
-        <div class="p-6 mt-6 text-left border w-96 rounded-xl ">
+        <div class="text-left border w-96 rounded-xl ">
           <div class="my-2 text-xl">
             <label for="name" class="text-gray-700">Name</label>
             <input id="name" name="name" type="text" v-model="state.user.name"

@@ -4,28 +4,28 @@
   </div>
   <div class="flex justify-center">
     <div class="flex">
-      <router-link to="/" class="mx-2 p-2 border-b hover:border-green-600 font-bold text-green-600">
-        Homepage
+      <router-link to="/" class="mx-1 p-1 border-b hover:border-green-600 font-bold text-green-600">
+        Home
       </router-link>
     </div>
     <div v-if="!loggedIn" class="flex">
-      <router-link to="/login" class="mx-2 p-2 border-b hover:border-green-600 font-bold text-green-600">
+      <router-link to="/login" class="mx-1 p-1 border-b hover:border-green-600 font-bold text-green-600">
         Login
       </router-link>
-      <router-link to="/register" class="mx-2 p-2 border-b hover:border-green-600 font-bold text-green-600">
+      <router-link to="/register" class="mx-1 p-1 border-b hover:border-green-600 font-bold text-green-600">
         Register
       </router-link>
     </div>
     <div v-else class="flex">
-      <router-link to="/profile" class="mx-2 p-2 border-b hover:border-green-600 font-bold text-green-600">
+      <router-link to="/profile" class="mx-1 p-1 border-b hover:border-green-600 font-bold text-green-600">
         Profile
       </router-link>
-      <router-link to="/appointment" class="mx-2 p-2 border-b hover:border-green-600 font-bold text-green-600">
+      <router-link to="/appointment" class="mx-1 p-1 border-b hover:border-green-600 font-bold text-green-600">
         Appointments
       </router-link>
 
       <form @submit="handleLogout">
-        <button class="mx-2 p-2 border-b hover:border-green-600 font-bold text-green-600">
+        <button class="mx-1 p-1 border-b hover:border-green-600 font-bold text-green-600">
           <span>Logout</span>
         </button>
       </form>
@@ -55,15 +55,7 @@ watch(store.state.auth.status, (status) => {
 
 const handleLogout = (event) => {
   event.preventDefault();
-
-  store.dispatch("auth/logout").then(
-      () => {
-        router.push('/');
-      },
-      () => {
-
-      }
-  );
+  store.dispatch("auth/logout").then(() => router.push('/login'));
 }
 
 

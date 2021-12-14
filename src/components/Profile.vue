@@ -1,17 +1,16 @@
 <template>
-  <div class="p-6 mt-6 text-left border w-full rounded" v-if="currentUser">
+  <div class="m-3 p-3 text-left border w-full rounded" v-if="currentUser">
     <header v-if="currentUser">
       <h3 class="font-bold text-indigo-600 text-center pb-6">
        {{ currentUser.name }}'s Profile
       </h3>
     </header>
 
-    <div class="flex">
-      <div class="w-1/12">
+    <div class="lg:flex ">
+      <div class="w-full lg:w-1/12 inline-flex align-middle justify-center">
           <img
-              id="profile-img"
               src="//ssl.gstatic.com/accounts/ui/avatar_2x.png"
-              class="rounded-lg "
+              class="object-center rounded-lg "
           />
       </div>
       <div class="p-5">
