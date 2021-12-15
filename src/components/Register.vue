@@ -1,16 +1,15 @@
 <template>
-  <div class="col-md-12">
+  <div class="m-3 p-2 col-md-12">
     <div class="">
-      <div class="w-1/5 m-auto">
+      <div class=" inline-flex align-middle justify-center">
         <img
-            id="profile-img"
             src="//ssl.gstatic.com/accounts/ui/avatar_2x.png"
-            class="rounded-lg "
+            class="rounded-lg  w-1/2 m-2"
         />
       </div>
 
       <form @submit="handleRegister">
-        <div class="text-left border w-96 rounded-xl ">
+        <div class="text-left border rounded-xl ">
           <div class="my-2 text-xl">
             <label for="name" class="text-gray-700">Name</label>
             <input id="name" name="name" type="text" v-model="state.user.name"

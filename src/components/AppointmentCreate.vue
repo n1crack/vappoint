@@ -1,5 +1,5 @@
 <template>
-  <div class="grid grid-cols-12 lg:gap-5">
+  <div class="m-3 p-2 grid grid-cols-12 lg:gap-5">
     <div class="col-span-12 lg:col-span-8">
       <div id="map" class="h-72 lg:h-full"></div>
     </div>
@@ -137,7 +137,7 @@ const handleCreate = (event) => {
             router.push("/appointment");
           }
       )
-      .catch((error) => { 
+      .catch((error) => {
         errors.value =
             (error.response &&
                 error.response.data &&
