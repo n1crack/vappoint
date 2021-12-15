@@ -38,7 +38,7 @@
                    class="p-1 border border-gray-400 rounded w-full"/>
           </div>
           <div class="my-2 lg:text-xl text-center">
-            <button class="border p-2 text-gray-600 rounded hover:bg-gray-100 hover:border-gray-300">
+            <button class="border p-2 text-gray-600 rounded bg-gray-100 hover:bg-gray-200 hover:border-gray-300">
               <span>Create Appointment</span>
             </button>
           </div>
@@ -75,7 +75,7 @@ const state = reactive(
         email: 'jane@test.com',
         phone: '+9055555555',
         address: 'CM8 1EF',
-        date: moment().format("YYYY-MM-DDTkk:mm"),
+        date: moment().format("YYYY-MM-DDTHH:mm"),
       }
     });
 let errors = ref();

@@ -9,7 +9,7 @@
       </div>
 
       <form @submit="handleRegister">
-        <div class="text-left border rounded-xl ">
+        <div class="text-left border rounded-xl p-2">
           <div class="my-2 text-xl">
             <label for="name" class="text-gray-700">Name</label>
             <input id="name" name="name" type="text" v-model="state.user.name"
@@ -27,7 +27,7 @@
           </div>
 
           <div class="my-2 text-xl text-center">
-            <button class="border p-2 text-gray-600 rounded hover:bg-gray-100 hover:border-gray-300">
+            <button class="border p-2 text-gray-600 rounded bg-gray-100 hover:bg-gray-200 hover:border-gray-300">
               <span>Register</span>
             </button>
           </div>

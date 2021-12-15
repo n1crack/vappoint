@@ -9,7 +9,7 @@
       </div>
 
       <form @submit="handleLogin">
-        <div class="text-left border rounded-xl ">
+        <div class="text-left border rounded-xl p-2">
 
           <div class="my-2 text-xl">
             <label for="email" class="text-gray-700">Email</label>
@@ -24,7 +24,7 @@
           </div>
 
           <div class="my-2 text-xl text-center">
-            <button class="border p-2 text-gray-600 rounded hover:bg-gray-100 hover:border-gray-300">
+            <button class="border p-2 text-gray-600 rounded bg-gray-100 hover:bg-gray-200 hover:border-gray-300">
               <span>Login</span>
             </button>
           </div>
