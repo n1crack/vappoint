@@ -92,7 +92,9 @@ onMounted(() => {
   const onMapClick = async (e) => {
 
     // find nearest post code..
-    const response =  await axios.get(API_URL + 'api/postcodes/nearest', {
+
+
+    axios.get(API_URL + 'api/postcodes/nearest', {
           params: {
             lon: e.latlng.lng,
             lat: e.latlng.lat
@@ -100,19 +102,27 @@ onMounted(() => {
           headers: authHeader()
         }
     )
-    nearestPostCode.value = response.data;
-    state.appointment.address = response.data.postcode ?? '';
-    state.path = response.data.appointment;
+        .then((response) => {
+          nearestPostCode.value = response.data;
+          state.appointment.address = response.data.postcode ?? '';
+          state.path = response.data.appointment;
 
-    const polyline = window.L.polyline(decodePath(state.path.points), {color: 'orange'});
+          const polyline = window.L.polyline(decodePath(state.path.points), {color: 'orange'});
 
-    pLineGroup.clearLayers();
-    pLineGroup.addLayer(polyline)
+          pLineGroup.clearLayers();
+          pLineGroup.addLayer(polyline)
 
-    popup
-        .setLatLng(e.latlng)
-        .setContent("You clicked the map at " + e.latlng.toString() + "<br><strong>Time to arrive:</strong> " + (state.path.time/(60*1000)).toFixed(2) + " min, <br><strong>Distance:</strong> " + (state.path.distance/1000).toFixed(2)  + " km")
-        .openOn(map);
+          popup
+              .setLatLng(e.latlng)
+              .setContent("You clicked the map at " + e.latlng.toString() + "<br><strong>Time to arrive:</strong> " + (state.path.time / (60 * 1000)).toFixed(2) + " min, <br><strong>Distance:</strong> " + (state.path.distance / 1000).toFixed(2) + " km")
+              .openOn(map);
+        })
+        .catch(function (error) {
+          popup
+              .setLatLng(e.latlng)
+              .setContent(error.response.data.error || 'Not found.')
+              .openOn(map);
+        })
   }
 
   map.on('click', onMapClick);
