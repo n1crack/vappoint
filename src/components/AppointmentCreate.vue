@@ -65,6 +65,7 @@ import "leaflet/dist/leaflet"
 import "leaflet/dist/leaflet.css"
 import authHeader from "../services/auth-header";
 import {API_URL, MAPBOX_API_KEY} from "../../config";
+import decodePath from "../plugins/GHUtil";
 
 const router = useRouter();
 const state = reactive(
@@ -76,7 +77,8 @@ const state = reactive(
         phone: '+9055555555',
         address: 'CM8 1EF',
         date: moment().format("YYYY-MM-DDTHH:mm"),
-      }
+      },
+      path : ''
     });
 let errors = ref();
 const nearestPostCode = ref();
@@ -85,36 +87,44 @@ onMounted(() => {
   const map = window.L.map('map').setView([51.729117, 0.477935], 18);
   const popup = window.L.popup();
 
-  const onMapClick = (e) => {
+  const pLineGroup = window.L.layerGroup()
+    pLineGroup.addTo(map);
+  const onMapClick = async (e) => {
 
     // find nearest post code..
-    axios.get(API_URL + 'api/postcodes/nearest', {
+    const response =  await axios.get(API_URL + 'api/postcodes/nearest', {
           params: {
             lon: e.latlng.lng,
             lat: e.latlng.lat
           },
           headers: authHeader()
         }
-    ).then(
-        (response) => {
-          nearestPostCode.value = response.data;
-          state.appointment.address = response.data.postcode ?? '';
-        },
-        () => {
-        }
-    );
+    )
+    nearestPostCode.value = response.data;
+    state.appointment.address = response.data.postcode ?? '';
+    state.path = response.data.appointment;
+
+    const polyline = window.L.polyline(decodePath(state.path.points), {color: 'orange'});
+
+    pLineGroup.clearLayers();
+    pLineGroup.addLayer(polyline)
 
     popup
         .setLatLng(e.latlng)
-        .setContent("You clicked the map at " + e.latlng.toString())
+        .setContent("You clicked the map at " + e.latlng.toString() + "<br><strong>Time to arrive:</strong> " + (state.path.time/(60*1000)).toFixed(2) + " min, <br><strong>Distance:</strong> " + (state.path.distance/1000).toFixed(2)  + " km")
         .openOn(map);
   }
 
   map.on('click', onMapClick);
 
-  const myIcon = window.L.divIcon({className: 'map-marker', iconSize: [24, 36]});
+  const myIcon = window.L.divIcon({
+    className: 'map-marker',
+    iconSize: [24, 36],
+    iconAnchor: [12, 36],
+    popupAnchor: [-3, -26]
+  });
 
-  window.L.marker([51.729117, 0.477935]).setIcon(myIcon).addTo(map);
+  window.L.marker([51.729117, 0.477935]).bindPopup('This is Estate Agency').setIcon(myIcon).addTo(map);
 
   window.L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
     attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
